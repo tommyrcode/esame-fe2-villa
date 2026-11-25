@@ -45,7 +45,7 @@ type SpokenLanguage = {
   name: string;
 };
 
-type MovieDetail = {
+export type MovieDetail = {
   adult: boolean;
   backdrop_path: string | null;
   belongs_to_collection: BelongsToCollection | null;

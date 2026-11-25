@@ -1,15 +1,15 @@
+import { Link } from 'react-router'
 import './header.css';
 
 function Header() {
     return (
         <header className="header">
-            <div className="header_brand">
-                <nav className="Header_nav">
-                    <a href="/">Home / Elenco</a>
-                </nav>
-            </div>
+            <div className="header__brand">Movie App</div>
+            <nav className="header__nav">
+                <Link to="/">Home / Elenco</Link>
+            </nav>
         </header>
     );
 }
 
-export default Header;
+export default Header
