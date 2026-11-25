@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import type { MovieList, MovieSearchResponse } from "../types/types"
+import MovieCard from './MovieCard'
+import './MovieListPage.css'
 
 function MovieListPage() {
 const [movies, setMovies] = useState<MovieList[]>([])
@@ -41,11 +43,15 @@ if (error) return <p role="alert">{error}</p>
 return (
     <section>
         <h1>The Lord of the Rings</h1>
-        <ul>
-            {movies.map((movie) => (
-                <li key={movie.id}>{movie.title}</li>
-            ))}
-        </ul>
+        <div className="movie-grid">
+            {movies.map((movie, index) => (
+            <MovieCard
+            key={movie.id}
+            movie={movie}
+            isDetailLinkEnabled={index ===0} />
+        ))}
+        </div>
+        
     </section>
     )
 }

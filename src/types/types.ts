@@ -13,6 +13,7 @@ export type MovieSearchResponse = {
 
 export type MovieCardProps = {
     movie: MovieList;
+    isDetailLinkEnabled: boolean;
 };
 
 type BelongsToCollection = {

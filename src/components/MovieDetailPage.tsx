@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import type { MovieDetail } from '../types/types';
+import './MovieDetailPage.css'
+
 
 function MovieDetailPage() {
     const { id } = useParams()
@@ -55,7 +57,53 @@ if (!movie) return <p>Film non trovato</p>
 
 return (
     <section>
-        <h1>{movie.title}</h1>
+      <Link className="back-link" to="/">← Torna all'elenco</Link>
+      <article className="detail">
+      <div className="detail__poster">
+        {movie.poster_path ? (
+          <img
+            className="detail__poster-image"
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={`Poster di ${movie.title}`}
+          />
+        ) : (
+          <span>Poster non disponibile</span>
+        )}
+      </div>
+
+      <div>
+        <h1 className="detail__title">{movie.title}</h1>
+        {movie.tagline && <p className="detail__tagline">{movie.tagline}</p>}
+        <ul className="detail__meta">
+          <li>Uscita: {movie.release_date || 'N/D'}</li>
+          <li>Durata: {movie.runtime ? `${movie.runtime} min` : 'N/D'}</li>
+          <li>Voto: {movie.vote_average.toFixed(1)}</li>
+          <li>Voti: {movie.vote_count}</li>
+          <li>Stato: {movie.status}</li>
+          <li>
+            Lingua:{' '}
+            {movie.spoken_languages.map((language) => language.english_name).join(', ')
+              || movie.original_language}
+          </li>
+        </ul>
+
+        <div className="detail__genres">
+          {movie.genres.map((genre) => (
+            <span className="genre" key={genre.id}>{genre.name}</span>
+          ))}
+        </div>
+
+        <p className="detail__overview-label">Trama</p>
+        <p className="detail__overview">
+          {movie.overview || 'Trama non disponibile'}
+        </p>
+
+        <p className="detail__production">
+          Produzione:{' '}
+          {movie.production_companies.map((company) => company.name).join(' · ') || 'N/D'}
+        </p>
+      </div>
+    </article>
     </section>
 )
 }
